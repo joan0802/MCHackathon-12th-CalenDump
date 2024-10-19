@@ -2,21 +2,47 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { useAuth } from "@/contexts/AuthContext";
 // import { CameraIcon } from '@/camera.png'
 
-export default function TimeSlots() {
+export default function TimeSlots(date) {
+    if (date === undefined) {
+      // set to today
+      const today = new Date();
+      date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    };
+    
     const fileInputRef = useRef(null);
     const [uploadedImage, setUploadedImage] = useState(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [timeSlots, setTimeSlots] = useState([]);
+    const {user} = useAuth();
 
-
-
-    const timeSlots = [
-        { time: "10:00-12:00", title: "微積分期中考" },
-        { time: "13:00-15:00", title: "演算法上課" },
-        { time: "15:30-16:30", title: "讀書會" },
-        { time: "17:00-18:00", title: "吃晚餐" },
-    ];
+    useEffect(() => {
+      async function fetchData() {
+        try{
+          const data = await fetchEvent(date);
+          setTimeSlots(data);
+        } catch (error) {
+          console.log(error);
+          alert(error);
+          window.location.href = '/login';
+        }
+      }
+  
+    if(user) {
+      fetchData();
+    } else {
+      alert('請先登入');
+      window.location.href = '/login';
+    }
+  }, [date, user]);
+    // const timeSlots = [
+    //     { time: "10:00-12:00", title: "微積分期中考" },
+    //     { time: "13:00-15:00", title: "演算法上課" },
+    //     { time: "15:30-16:30", title: "讀書會" },
+    //     { time: "17:00-18:00", title: "吃晚餐" },
+    // ];
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -107,4 +133,26 @@ export default function TimeSlots() {
             ))}
         </div>
     );
+  }
+    async function fetchEvent(date) {
+      const { user } = useAuth();
+      if (!user) throw new Error('Not authenticated');
+    
+      // const response = await fetch('/api/event/' + date, 'GET', {
+      //   headers: {
+      //     'Authorization': `Bearer ${user.token}`
+      //   }
+      // });
+    
+      const response = [
+        {event_id: 1, start_time: '2023-05-04T08:00:00', end_time: '2023-05-04T09:00:00', title: '微積分小考'},
+        {event_id: 2, start_time: '2023-05-04T09:00:00', end_time: '2023-05-04T10:00:00', title: '演算法'},
+        {event_id: 3, start_time: '2023-05-04T10:00:00', end_time: '2023-05-04T11:00:00', title: '讀書會'},
+        {event_id: 4, start_time: '2023-05-04T11:00:00', end_time: '2023-05-04T12:00:00', title: '吃晚餐'},
+      ]
+    
+      if (!response.ok) {
+        throw new Error('Failed to fetch events');
+      }
+      return response.json();
 }
