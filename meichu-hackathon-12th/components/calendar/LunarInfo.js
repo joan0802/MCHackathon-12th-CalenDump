@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Calendar() {
+export default function Lunar() {
   const events = [
     { time: "10:00-12:00", title: "微積分考試" },
     { time: "13:00-17:00", title: "基本設計 (一)" },

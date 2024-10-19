@@ -6,7 +6,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import DateHeader from '@/components/calendar/DateHeader';
 import TimeSlots from '@/components/calendar/TimeSlots';
-import WrapTimeSlot from "@/components/calendar/WrapTimeSlot";
+import LunarInfo from "@/components/calendar/LunarInfo";
 // import GoogleCalendarButton from '@/components/calendar/GoogleCalendarButton';
 
 
@@ -32,7 +32,7 @@ export default function Home() {
             <Card className="max-w-md mx-auto h-full bg-white relative rounded-2xl">
                 <CardContent className="p-0 h-full rounded-2xl">
                     <DateHeader/>
-                    <WrapTimeSlot/>
+                    <LunarInfo/>
                     <TimeSlots />
                     {/* <GoogleCalendarButton /> */}
                 </CardContent>
