@@ -20,7 +20,7 @@ export default function TimeSlots(date) {
 
     useEffect(() => {
       async function fetchData() {
-        try{
+        try {
           const data = await fetchEvent(date);
           setTimeSlots(data);
         } catch (error) {
@@ -134,25 +134,44 @@ export default function TimeSlots(date) {
         </div>
     );
   }
-    async function fetchEvent(date) {
-      const { user } = useAuth();
-      if (!user) throw new Error('Not authenticated');
-    
-      // const response = await fetch('/api/event/' + date, 'GET', {
-      //   headers: {
-      //     'Authorization': `Bearer ${user.token}`
-      //   }
-      // });
-    
-      const response = [
-        {event_id: 1, start_time: '2023-05-04T08:00:00', end_time: '2023-05-04T09:00:00', title: '微積分小考'},
-        {event_id: 2, start_time: '2023-05-04T09:00:00', end_time: '2023-05-04T10:00:00', title: '演算法'},
-        {event_id: 3, start_time: '2023-05-04T10:00:00', end_time: '2023-05-04T11:00:00', title: '讀書會'},
-        {event_id: 4, start_time: '2023-05-04T11:00:00', end_time: '2023-05-04T12:00:00', title: '吃晚餐'},
-      ]
-    
-      if (!response.ok) {
-        throw new Error('Failed to fetch events');
-      }
-      return response.json();
+
+let eventNote = new Map();
+let eventImg = new Map();
+async function fetchEvent(date) {
+  const response = await fetch('/api/event/' + date, 'GET', {
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
+  });
+
+  // const response = [
+  //   {event_id: 1, start_time: '2024-10-19T08:00:00.000Z', end_time: '2024-10-19T09:00:00.000Z', title: '微積分小考', note: "今天考得好難QQ"},
+  //   {event_id: 2, start_time: '2024-10-19T09:00:00.000Z', end_time: '2024-10-19T10:00:00.000Z', title: '演算法', img: 'some url'},
+  //   {event_id: 3, start_time: '2024-10-19T10:00:00.000Z', end_time: '2024-10-19T11:00:00.000Z', title: '讀書會'},
+  //   {event_id: 4, start_time: '2024-10-19T11:00:00.000Z', end_time: '2024-10-19T12:00:00.000Z', title: '吃晚餐'},
+  // ]
+
+  for (let i = 0; i < response.length; i++) {
+    // hh:mm
+    response[i].start_time = formatTime(response[i].start_time);
+    response[i].end_time = formatTime(response[i].end_time);
+    if (response[i].note != null) {
+      eventNote[response[i].event_id] = response[i].note;
+    }
+    if (response[i].img != null) {
+      eventImg[response[i].event_id] = response[i].img;
+    }
+  }
+  if (!response.ok) {
+    throw new Error('Failed to fetch events');
+  }
+  // return response;
+  return response.json();
+}
+
+function formatTime(dateTimeString) {
+  const date = new Date(dateTimeString);
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
 }
