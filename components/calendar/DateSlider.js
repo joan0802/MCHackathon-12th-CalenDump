@@ -41,7 +41,7 @@ function DateSlider({ selectedDate, setSelectedDate }) {
                         variant="ghost"
                         className="hover:bg-transparent"
                     >
-                        <span className="text-green-800 text-[120px] leading-none font-bold">
+                        <span className="text-green-800 text-[200px] leading-none font-[1000]">
                             {selectedDate ? selectedDate.getDate().toString().padStart(2, '0') : '00'}
                         </span>
                     </Button>

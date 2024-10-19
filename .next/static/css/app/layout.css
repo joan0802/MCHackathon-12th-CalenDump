@@ -593,6 +593,12 @@ video {
 .z-50 {
   z-index: 50;
 }
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+.m-0 {
+  margin: 0px;
+}
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -646,11 +652,26 @@ video {
 .h-9 {
   height: 2.25rem;
 }
+.h-\[20\%\] {
+  height: 20%;
+}
+.h-\[25\%\] {
+  height: 25%;
+}
+.h-\[32rem\] {
+  height: 32rem;
+}
+.h-\[60\%\] {
+  height: 60%;
+}
 .h-full {
   height: 100%;
 }
 .h-screen {
   height: 100vh;
+}
+.h-\[20rem\] {
+  height: 20rem;
 }
 .w-10 {
   width: 2.5rem;
@@ -701,6 +722,9 @@ video {
 }
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 .grid-cols-7 {
   grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -769,6 +793,10 @@ video {
 .border-input {
   border-color: hsl(var(--input));
 }
+.border-green-800 {
+  --tw-border-opacity: 1;
+  border-color: rgb(22 101 52 / var(--tw-border-opacity));
+}
 .bg-background {
   background-color: hsl(var(--background));
 }
@@ -803,6 +831,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
+.bg-green-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 101 52 / var(--tw-bg-opacity));
+}
 .object-contain {
   object-fit: contain;
 }
@@ -823,6 +855,9 @@ video {
 }
 .p-6 {
   padding: 1.5rem;
+}
+.p-1 {
+  padding: 0.25rem;
 }
 .px-1 {
   padding-left: 0.25rem;
@@ -848,6 +883,10 @@ video {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 .pb-1 {
   padding-bottom: 0.25rem;
 }
@@ -857,8 +896,17 @@ video {
 .pt-1 {
   padding-top: 0.25rem;
 }
+.pt-5 {
+  padding-top: 1.25rem;
+}
+.text-left {
+  text-align: left;
+}
 .text-center {
   text-align: center;
+}
+.text-right {
+  text-align: right;
 }
 .font-serif {
   font-family: "Noto Serif", serif;
@@ -870,8 +918,8 @@ video {
 .text-\[1\.3rem\] {
   font-size: 1.3rem;
 }
-.text-\[120px\] {
-  font-size: 120px;
+.text-\[150px\] {
+  font-size: 150px;
 }
 .text-lg {
   font-size: 1.125rem;
@@ -885,14 +933,62 @@ video {
   font-size: 0.75rem;
   line-height: 1rem;
 }
-.font-bold {
-  font-weight: 700;
+.text-\[170px\] {
+  font-size: 170px;
+}
+.text-\[200px\] {
+  font-size: 200px;
+}
+.text-\[250px\] {
+  font-size: 250px;
+}
+.text-\[2rem\] {
+  font-size: 2rem;
+}
+.text-\[1\.5rem\] {
+  font-size: 1.5rem;
+}
+.text-\[1\.4rem\] {
+  font-size: 1.4rem;
 }
 .font-medium {
   font-weight: 500;
 }
 .font-semibold {
   font-weight: 600;
+}
+.font-\[100\] {
+  font-weight: 100;
+}
+.font-bold {
+  font-weight: 700;
+}
+.font-extrabold {
+  font-weight: 800;
+}
+.font-black {
+  font-weight: 900;
+}
+.font-\[1100\] {
+  font-weight: 1100;
+}
+.font-\[1200\] {
+  font-weight: 1200;
+}
+.font-\[900\] {
+  font-weight: 900;
+}
+.font-\[1000\] {
+  font-weight: 1000;
+}
+.font-\[1300\] {
+  font-weight: 1300;
+}
+.font-\[1400\] {
+  font-weight: 1400;
+}
+.font-\[1500\] {
+  font-weight: 1500;
 }
 .leading-none {
   line-height: 1;
@@ -1031,6 +1127,10 @@ body {
     font-family: "PT Serif", serif;
     font-weight: 700;
     font-style: italic;
+  }
+  
+  .font-weight-date {
+    font-weight: 100;
   }
   
   .hover\:bg-accent:hover {
@@ -1179,6 +1279,10 @@ body {
   
   @media (min-width: 640px) {
 
+  .sm\:max-w-\[425px\] {
+    max-width: 425px;
+  }
+
   .sm\:flex-row {
     flex-direction: row;
   }
@@ -1214,4 +1318,3 @@ body {
   .\[\&_svg\]\:shrink-0 svg {
   flex-shrink: 0;
 }
-  

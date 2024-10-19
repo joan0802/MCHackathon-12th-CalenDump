@@ -12,7 +12,7 @@ export default function Lunar() {
   const themeGreen = "#13492F";
   const commonWidthClass = "w-28";
   return (
-    <section className="flex flex-col self-center px-1 pt-1 pb-1 mt-1.5 w-full items-center" style={{backgroundColor: themeGreen}}>
+    <section className="flex flex-col self-center pt-1 pb-1 mt-1.5 w-full items-center" style={{backgroundColor: themeGreen}}>
       <div className="flex flex-row items-stretch justify-between items-center">
         <div className="flex">
           <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d7541d7a2ce8a22b023132bb924fe207fedaa195f66ff43c92454c06f3af6236?placeholderIfAbsent=true&apiKey=f345c5a50f9b4d99820ae16d3d0c6b88" 
@@ -23,12 +23,12 @@ export default function Lunar() {
             <strong>甲辰年 &nbsp;九月十五</strong>
           </div>
           <div className={`flex flex-col items-center px-2 py-2 text-2xl text-center text-white whitespace-nowrap ${commonWidthClass}`} style={{backgroundColor: themeGreen}}>
-          <strong>初一十五</strong>
+          <p className="font-black">初一十五</p>
           </div>
         </div>
         <div className="flex flex-col items-center text-center whitespace-nowrap mr-2">
           <div className={`px-2 py-2 mt-1 text-xs text-black bg-white ${commonWidthClass}`} style={{color: themeGreen}}>
-            <strong>WEDNESDAY</strong>
+            <strong className="text-md">WEDNESDAY</strong>
           </div>
           <div className={`px-2 py-2 text-2xl text-white ${commonWidthClass}`} style={{backgroundColor: themeGreen}}>
             <strong>星期三</strong>

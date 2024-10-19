@@ -32,7 +32,9 @@ export default function Home() {
             <Card className="max-w-md mx-auto h-full bg-white relative rounded-2xl">
                 <CardContent className="p-0 h-full rounded-2xl">
                     <DateHeader/>
+                    <div className="bg-green-800">
                     <LunarInfo/>
+                    </div>
                     <TimeSlots />
                     {/* <GoogleCalendarButton /> */}
                 </CardContent>

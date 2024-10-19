@@ -106,3 +106,6 @@ body {
     font-style: italic;
   }
   
+  .font-weight-date {
+    font-weight: 100;
+  }
