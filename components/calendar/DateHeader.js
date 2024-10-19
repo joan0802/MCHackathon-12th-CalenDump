@@ -52,7 +52,7 @@ export default function DateHeader() {
             const response = await fetch(`/api/event/date=${formattedDate}`);
             const pageData = await response.json();
             // Handle the pageData as needed (e.g., update state)
-            router.push(`/page/${formattedDate}`);
+            // router.push(`/page/${formattedDate}`);
         } catch (error) {
             console.error('Error fetching page data:', error);
             // Handle error (e.g., show error message to user)

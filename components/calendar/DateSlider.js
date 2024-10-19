@@ -19,7 +19,7 @@ function DateSlider({ selectedDate, setSelectedDate }) {
         newDate.setDate(selectedDate.getDate() + delta);
         setSelectedDate(newDate);
         if (isClient) {
-            router.push(`/page/${newDate.toISOString().split('T')[0]}`);
+            // router.push(`/page/${newDate.toISOString().split('T')[0]}`);
         }
     };
 
