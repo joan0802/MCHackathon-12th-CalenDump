@@ -35,18 +35,21 @@ export default function Home() {
     return (
         <div className="h-screen">
             <Card className="max-w-md mx-auto h-full bg-white relative rounded-2xl">
-                <CardContent className="p-0 h-full rounded-2xl">
+                <CardContent className="p-0 h-full rounded-2xl ">
                     <Button onClick={test}>
                         hiiiiii
                     </Button>
                     <DateHeader />
                     <div className="w-full bg-[#13492f] h-[0.7rem] mb-2">
                     </div>
-                    <div className="border border-[0.75rem] border-[#13492f] h-[35rem]">
+                    <div className="border border-[0.75rem] border-[#13492f] h-[32rem]">
                         <LunarInfo />
                         <TimeSlots />
                     </div>
-                    <div className="w-full bg-[#13492f] h-[0.7rem] mt-2">
+                    <div className="bg-[#13492f] flex justify-end px-4 py-2">
+                        <Button className="rounded-2xl text-white bg-white bg-opacity-20 font-serif py-2 px-3 text-[1rem] font-bold">
+                            Your Weekly Dump
+                        </Button>
                     </div>
                     {/* <GoogleCalendarButton /> */}
                 </CardContent>
