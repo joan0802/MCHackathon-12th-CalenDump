@@ -1,5 +1,6 @@
 node_modules
 <<<<<<< HEAD
+<<<<<<< HEAD
 .env
 .next
 public/sw.js.map
@@ -7,3 +8,6 @@ public/sw.js.map
 .next
 .env
 >>>>>>> 9b8d1f16747d1c9e2538ec95a369aed8d5f675a7
+=======
+.env
+>>>>>>> 008a927afccf30774b8b4a869024f1280f200950
