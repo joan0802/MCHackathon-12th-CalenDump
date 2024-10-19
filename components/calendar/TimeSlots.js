@@ -14,6 +14,7 @@ export default function TimeSlots(date) {
     
     const fileInputRef = useRef(null);
     const [uploadedImage, setUploadedImage] = useState(null);
+    const [selectedSlot, setSelectedSlot] = useState(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [timeSlots, setTimeSlots] = useState([]);
     const {user} = useAuth();
