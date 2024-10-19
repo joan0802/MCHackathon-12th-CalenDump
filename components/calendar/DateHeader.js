@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import DateSlider from '@/components/calendar/DateSlider'
 
 export default function DateHeader() {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -48,7 +49,7 @@ export default function DateHeader() {
                         <DialogTrigger asChild>
                             <Button
                                 variant="ghost"
-                                className="text-green-800 hover:text-green-700 text-2xl font-large"
+                                className="text-green-800 hover:text-green-700 text-[1.3rem] font-large p-0 font-serif"
                             >
                                 {selectedDate.getFullYear()}
                             </Button>
@@ -68,53 +69,21 @@ export default function DateHeader() {
                                             setSelectedDate(newDate);
                                         }}
                                     >
-                                        <div className="p-0">
-                                        {year}
+                                        <div className="pt-serif-regular">
+                                            {year}
                                         </div>
                                     </Button>
                                 ))}
                             </div>
                         </DialogContent>
                     </Dialog>
-                    <div className="text-lg font-medium items-center">{currentMonth.en}</div>
-                    <div className="text-lg font-medium items-center">{currentMonth.zh}</div>
+                    <div className="text-[1.3rem] font-medium items-center no-padding-margin justify-center font-serif">{currentMonth.en}</div>
+                    <div className="text-[1.3rem] font-medium items-center no-padding-margin justify-center font-serif">{currentMonth.zh}</div>
                 </div>
             </div>
 
-            <div className="flex justify-center items-center p-10 mb-5">
-                <Dialog>
-                    <DialogTrigger asChild>
-                        <Button
-                            variant="ghost"
-                            className="hover:bg-transparent"
-                        >
-                            <span className="text-green-800 text-[120px] leading-none font-bold">
-                                {selectedDate.getDate().toString().padStart(2, '0')}
-                            </span>
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle>Select Date</DialogTitle>
-                        </DialogHeader>
-                        <div className="grid grid-cols-7 gap-2">
-                            {Array.from({ length: 31 }, (_, i) => i + 1).map(day => (
-                                <Button
-                                    key={day}
-                                    variant="outline"
-                                    className="w-10 h-10"
-                                    onClick={() => {
-                                        const newDate = new Date(selectedDate);
-                                        newDate.setDate(day);
-                                        setSelectedDate(newDate);
-                                    }}
-                                >
-                                    {day}
-                                </Button>
-                            ))}
-                        </div>
-                    </DialogContent>
-                </Dialog>
+            <div>
+                <DateSlider selectedDate={selectedDate} setSelectedDate={setSelectedDate}/>
             </div>
         </div>
     );
