@@ -2,6 +2,16 @@
 import withPWA from 'next-pwa';
 
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/login',
+        destination: process.env.BACKEND_URL + '/login',
+        permanent: true,
+        basePath: false,
+      },
+    ]
+  },
   // Other Next.js settings (if any)
 };
 
