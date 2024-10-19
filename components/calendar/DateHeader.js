@@ -13,13 +13,13 @@ export default function DateHeader() {
     const [isYearDialogOpen, setIsYearDialogOpen] = useState(false);
 
     // Update date every minute to ensure it stays current
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setSelectedDate(new Date());
-        }, 60000);
+    // useEffect(() => {
+    //     const timer = setInterval(() => {
+    //         setSelectedDate(new Date());
+    //     }, 60000);
 
-        return () => clearInterval(timer);
-    }, []);
+    //     return () => clearInterval(timer);
+    // }, []);
 
     // Get current month in English and Chinese
     const months = {

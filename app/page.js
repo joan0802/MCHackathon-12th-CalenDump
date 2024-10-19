@@ -64,7 +64,7 @@ export default function Home() {
                         </div>
                         <div className="border border-[0.75rem] border-[#13492f] h-[35rem]">
                             <LunarInfo />
-                            <TimeSlots date={new Date(2024, 9, 19)} />
+                            <TimeSlots dateString="2024-10-19" />
                         </div>
                         <div className="w-full bg-[#13492f] h-[0.7rem] mt-2">
                         </div>

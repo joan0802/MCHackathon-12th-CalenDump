@@ -6,7 +6,7 @@ const nextConfig = {
     return [
       {
         source: '/login',
-        destination: process.env.BACKEND_URL + '/login',
+        destination: process.env.NEXT_PUBLIC_BACKEND + '/login',
         permanent: true,
         basePath: false,
       },

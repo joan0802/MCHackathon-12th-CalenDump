@@ -5,13 +5,13 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from "@/contexts/AuthContext";
 // import { CameraIcon } from '@/camera.png'
 
-export default function TimeSlots(date) {
+export default function TimeSlots(dateString) {
     const [currentDate, setCurrentDate] = useState(() => {
-      if (date === undefined) {
+      if (dateString === "") {
         const today = new Date();
         return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
       }
-      return date;
+      return dateString;
     });
     
     const fileInputRef = useRef(null);
@@ -24,9 +24,9 @@ export default function TimeSlots(date) {
     useEffect(() => {
       async function fetchData(token) {
         try {
+            console.log("calling api");
           const data = await fetchEvent(currentDate, token);
           setTimeSlots((prevTimeSlots) => {
-            console.log(date);
             // Only update state if data has changed
             if (JSON.stringify(prevTimeSlots) !== JSON.stringify(data)) {
               return data;
@@ -36,7 +36,7 @@ export default function TimeSlots(date) {
         } catch (error) {
           console.log(error);
           alert(error);
-          window.location.href = '/login';
+        //   window.location.href = '/login';
         }
       }
   
@@ -160,19 +160,27 @@ export default function TimeSlots(date) {
 
 let eventNote = new Map();
 let eventImg = new Map();
-async function fetchEvent(date, token) {
-  // const response = await fetch('/api/event/' + date, 'GET', {
-  //   headers: {
-  //     'Authorization': `Bearer ${token}`
-  //   }
-  // });
+async function fetchEvent(dateString, token) {
+  const responsePromise = await fetch(process.env.NEXT_PUBLIC_BACKEND + '/api/event/' + '2024-10-13', {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "ngrok-skip-browser-warning": "true",
+    }
+  });
 
-  const response = [
-    {event_id: 1, start_time: '2024-10-19T08:00:00.000Z', end_time: '2024-10-19T09:00:00.000Z', title: '微積分小考', note: "今天考得好難QQ"},
-    {event_id: 2, start_time: '2024-10-19T09:00:00.000Z', end_time: '2024-10-19T10:00:00.000Z', title: '演算法', img: 'some url'},
-    {event_id: 3, start_time: '2024-10-19T10:00:00.000Z', end_time: '2024-10-19T11:00:00.000Z', title: '讀書會'},
-    {event_id: 4, start_time: '2024-10-19T11:00:00.000Z', end_time: '2024-10-19T12:00:00.000Z', title: '吃晚餐'},
-  ]
+    if (!responsePromise.ok) {
+    throw new Error('Failed to fetch events');
+  }
+  const response = await responsePromise.json();
+
+//   const response = [
+//     {event_id: 1, start_time: '2024-10-19T08:00:00.000Z', end_time: '2024-10-19T09:00:00.000Z', title: '微積分小考', note: "今天考得好難QQ"},
+//     {event_id: 2, start_time: '2024-10-19T09:00:00.000Z', end_time: '2024-10-19T10:00:00.000Z', title: '演算法', img: 'some url'},
+//     {event_id: 3, start_time: '2024-10-19T10:00:00.000Z', end_time: '2024-10-19T11:00:00.000Z', title: '讀書會'},
+//     {event_id: 4, start_time: '2024-10-19T11:00:00.000Z', end_time: '2024-10-19T12:00:00.000Z', title: '吃晚餐'},
+//   ]
 
   for (let i = 0; i < response.length; i++) {
     // hh:mm
@@ -185,11 +193,8 @@ async function fetchEvent(date, token) {
       eventImg[response[i].event_id] = response[i].img;
     }
   }
-  // if (!response.ok) {
-  //   throw new Error('Failed to fetch events');
-  // }
+
   return response;
-  // return response.json();
 }
 
 function formatTime(dateTimeString) {
@@ -197,4 +202,12 @@ function formatTime(dateTimeString) {
   const hours = date.getHours().toString().padStart(2, '0');
   const minutes = date.getMinutes().toString().padStart(2, '0');
   return `${hours}:${minutes}`;
+}
+
+function formatDate(dateTimeString){
+    const date = new Date(dateTimeString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // getMonth() is zero-based
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
 }
