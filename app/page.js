@@ -31,11 +31,15 @@ export default function Home() {
         <div className="h-screen bg-black">
             <Card className="max-w-md mx-auto h-full bg-white relative rounded-2xl">
                 <CardContent className="p-0 h-full rounded-2xl">
-                    <DateHeader/>
-                    <div className="bg-green-800">
-                    <LunarInfo/>
+                    <DateHeader />
+                    <div className="w-full bg-[#13492f] h-[0.7rem] mb-2">
                     </div>
-                    <TimeSlots />
+                    <div className="border border-[0.75rem] border-[#13492f] h-[35rem]">
+                        <LunarInfo />
+                        <TimeSlots />
+                    </div>
+                    <div className="w-full bg-[#13492f] h-[0.7rem] mt-2">
+                    </div>
                     {/* <GoogleCalendarButton /> */}
                 </CardContent>
             </Card>

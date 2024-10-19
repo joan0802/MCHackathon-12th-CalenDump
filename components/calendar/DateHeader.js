@@ -86,7 +86,7 @@ export default function DateHeader() {
                         <DialogTrigger asChild>
                             <Button
                                 variant="ghost"
-                                className="text-green-800 hover:text-green-700 text-[1.3rem] font-large p-0 font-serif"
+                                className="text-green-800 hover:text-green-700 text-[1.3rem] font-bold p-0 font-serif"
                             >
                                 {selectedDate.getFullYear()}
                             </Button>
@@ -126,7 +126,7 @@ export default function DateHeader() {
                         <DialogTrigger asChild>
                             <Button
                                 variant="ghost"
-                                className="flex justify-between text-green-800 hover:text-green-700 text-[1.3rem] mt-1 font-large p-0 font-serif"
+                                className="flex justify-between text-green-800 hover:text-green-700 text-[1.3rem] mt-1 font-bold p-0 font-serif"
                             >
                                 {currentMonth.en}
                             </Button>
@@ -134,7 +134,7 @@ export default function DateHeader() {
                         <DialogTrigger asChild>
                             <Button
                                 variant="ghost"
-                                className="flex justify-between text-green-800 hover:text-green-700 text-[1.3rem] font-large p-0 font-serif"
+                                className="flex justify-between text-green-800 hover:text-green-700 text-[1.3rem] font-black p-0 font-serif"
                             >
                                 {currentMonth.zh}
                             </Button>

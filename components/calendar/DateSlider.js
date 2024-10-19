@@ -34,14 +34,14 @@ function DateSlider({ selectedDate, setSelectedDate }) {
     }
 
     return (
-        <div {...swipeHandlers} className="flex justify-center items-center p-10 mb-5">
+        <div {...swipeHandlers} className="flex justify-center items-center p-10 mb-8">
             <Dialog>
                 <DialogTrigger asChild>
                     <Button
                         variant="ghost"
                         className="hover:bg-transparent"
                     >
-                        <span className="text-green-800 text-[200px] leading-none font-[1000]">
+                        <span className="text-[#13492f] text-[200px] leading-none text-stroke-10 text-stroke-green font-[1000]">
                             {selectedDate ? selectedDate.getDate().toString().padStart(2, '0') : '00'}
                         </span>
                     </Button>
