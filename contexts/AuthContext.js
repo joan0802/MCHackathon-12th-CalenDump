@@ -7,14 +7,13 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     const token = getCookie('auth-token');
-    if (token) {
+    if (token && !user) {
       // Validate token and set user
       setUser({ token });
     }
-  }, []);
+  }, [user]);
 
   const login = (token) => {
     setCookie('auth-token', token, { maxAge: 5 * 60 * 60 }); // 5 hrs

@@ -6,24 +6,33 @@ import { useAuth } from "@/contexts/AuthContext";
 // import { CameraIcon } from '@/camera.png'
 
 export default function TimeSlots(date) {
-    if (date === undefined) {
-      // set to today
-      const today = new Date();
-      date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-    };
+    const [currentDate, setCurrentDate] = useState(() => {
+      if (date === undefined) {
+        const today = new Date();
+        return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+      }
+      return date;
+    });
     
     const fileInputRef = useRef(null);
     const [uploadedImage, setUploadedImage] = useState(null);
     const [selectedSlot, setSelectedSlot] = useState(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [timeSlots, setTimeSlots] = useState([]);
-    const {user} = useAuth();
+    //const {user} = useAuth();
 
     useEffect(() => {
-      async function fetchData() {
+      async function fetchData(token) {
         try {
-          const data = await fetchEvent(date);
-          setTimeSlots(data);
+          const data = await fetchEvent(currentDate, token);
+          setTimeSlots((prevTimeSlots) => {
+            console.log(date);
+            // Only update state if data has changed
+            if (JSON.stringify(prevTimeSlots) !== JSON.stringify(data)) {
+              return data;
+            }
+            return prevTimeSlots;
+          });
         } catch (error) {
           console.log(error);
           alert(error);
@@ -31,13 +40,14 @@ export default function TimeSlots(date) {
         }
       }
   
-    if(user) {
-      fetchData();
+    let token = localStorage.getItem('userToken');
+    if(token) {
+      fetchData(token);
     } else {
       alert('請先登入');
       window.location.href = '/login';
     }
-  }, [date, user]);
+  }, []);
     // const timeSlots = [
     //     { time: "10:00-12:00", title: "微積分期中考" },
     //     { time: "13:00-15:00", title: "演算法上課" },
@@ -83,7 +93,9 @@ export default function TimeSlots(date) {
                     className="flex items-center py-2 px-4 mb-2 bg-gray-50 border border-[#13492f] rounded-lg hover:bg-gray-100 cursor-pointer"
                 >
                     <div className="flex-1 font-[1000] text-[1.4rem] text-[#13492f]">{slot.title}</div>
-                    <div className="w-24 pt-5 text-right font-semibold text-sm text-[#13492f]">{slot.time}</div>
+                    <div className="w-24 pt-5 text-right font-semibold text-sm text-[#13492f]">{slot.start_time+' - '+slot.end_time}</div>
+                    
+            
                 </div>
             ))}
 
@@ -148,10 +160,10 @@ export default function TimeSlots(date) {
 
 let eventNote = new Map();
 let eventImg = new Map();
-async function fetchEvent(date) {
+async function fetchEvent(date, token) {
   // const response = await fetch('/api/event/' + date, 'GET', {
   //   headers: {
-  //     'Authorization': `Bearer ${user.token}`
+  //     'Authorization': `Bearer ${token}`
   //   }
   // });
 

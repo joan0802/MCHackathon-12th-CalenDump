@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import DateHeader from '@/components/calendar/DateHeader';
 import TimeSlots from '@/components/calendar/TimeSlots';
@@ -14,7 +14,7 @@ import { useAuth } from '@/contexts/AuthContext';
 export default function Home() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const { login, user } = useAuth();
+    const [token, setToken] = useState(null);
 
     useEffect(() => {
         if ('serviceWorker' in navigator) {
@@ -28,17 +28,22 @@ export default function Home() {
                     });
             });
         }
-        const token = searchParams.get('token');
-        if (token) {
-        login(token);
-        // Remove the token from the URL
-        router.replace('/');
+        const tokenParam = searchParams.get('token');
+        if (tokenParam) {
+            setToken(tokenParam);
+            localStorage.setItem('userToken', tokenParam);
         }
         else {
-            alert('登入以使用所有功能！');
-            window.location.href = '/login';
+            const storedToken = localStorage.getItem('userToken');
+            if (storedToken) {
+                setToken(storedToken);
+            } else {
+                alert('登入以使用所有功能！');
+                window.location.href = '/login';
+            }
+            
         }
-    }, [searchParams, login, router]);  
+    }, [searchParams, router]);  
     
     
     const test = () => {
@@ -46,7 +51,7 @@ export default function Home() {
     }
 
 
-    if(user){
+    if (localStorage.getItem('userToken')) {
         return (
             <div className="h-screen">
                 <Card className="max-w-md mx-auto h-full bg-white relative rounded-2xl">
@@ -59,7 +64,7 @@ export default function Home() {
                         </div>
                         <div className="border border-[0.75rem] border-[#13492f] h-[35rem]">
                             <LunarInfo />
-                            <TimeSlots />
+                            <TimeSlots date={new Date(2024, 9, 19)} />
                         </div>
                         <div className="w-full bg-[#13492f] h-[0.7rem] mt-2">
                         </div>
@@ -69,5 +74,4 @@ export default function Home() {
             </div>
         );
     }
-    return null;
 }
