@@ -109,3 +109,7 @@ body {
   .font-weight-date {
     font-weight: 100;
   }
+
+.dialog-overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* 使用黑色，透明度 0.3 */
+}
