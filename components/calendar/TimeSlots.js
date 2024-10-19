@@ -6,6 +6,10 @@ import { Button } from '@/components/ui/button';
 
 export default function TimeSlots() {
     const fileInputRef = useRef(null);
+    const [uploadedImage, setUploadedImage] = useState(null);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+
 
     const timeSlots = [
         { time: "10:00-12:00", title: "微積分期中考" },
@@ -13,6 +17,22 @@ export default function TimeSlots() {
         { time: "15:30-16:30", title: "讀書會" },
         { time: "17:00-18:00", title: "吃晚餐" },
     ];
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setUploadedImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleSaveFile = () => {
+        // store files to backend
+        setIsDialogOpen(false)
+    }
 
     // 當按下按鈕或圖片時，觸發 <input> 的點擊事件
     const handleButtonClick = () => {
@@ -24,7 +44,7 @@ export default function TimeSlots() {
     return (
         <div className="p-4">
             {timeSlots.map((slot, index) => (
-                <Dialog key={index}>
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} key={index}>
                     <DialogTrigger asChild>
                         <div
                             className="flex items-center py-2 px-4 mb-2 bg-gray-50 border border-green-800 rounded-lg hover:bg-gray-100 cursor-pointer"
@@ -34,7 +54,7 @@ export default function TimeSlots() {
 
                         </div>
                     </DialogTrigger>
-                    <DialogContent className="w-[25rem]">
+                    <DialogContent className="w-[23rem] rounded-lg">
                         <DialogHeader className="">
                             <DialogTitle>
                                 <div className="w-full items-center">
@@ -44,11 +64,20 @@ export default function TimeSlots() {
                             </DialogTitle>
                         </DialogHeader>
                         <div className="w-auto pb-4 h-[15rem]">
-                            <textarea
-                                id="feeling"
-                                className="border h-[10rem] border-green-800 border-[1px] w-full font-sans rounded-2xl p-4 bg-gray-50 placeholder:text-center outline-none"
-                                placeholder="Write down your feeling"
-                            ></textarea>
+                            <div className="flex justify-between gap-2">
+                                <textarea
+                                    id="feeling"
+                                    className="border h-[10rem] border-green-800 border-[1px] w-[50%] font-sans rounded-2xl p-4 bg-gray-50 placeholder:text-center items-center flex justify-center outline-none"
+                                    placeholder="Write down your feeling"
+                                ></textarea>
+                                <div className="border h-[10rem] border-green-800 border-[1px] w-[50%] rounded-2xl bg-gray-50">
+                                    {uploadedImage ? (
+                                        <img src={uploadedImage} alt="Uploaded" className="h-full w-full object-cover rounded-2xl" />
+                                    ) : (
+                                        <span className="p-4 items-center flex justify-center text-gray-400">Upload Photo</span>
+                                    )}
+                                </div>
+                            </div>
                             <div className="flex items-center justify-between pt-4">
                                 <Button variant="ghost" className="p-0 m-0" onClick={handleButtonClick}>
                                     <img
@@ -62,9 +91,10 @@ export default function TimeSlots() {
                                         ref={fileInputRef}  // 將 useRef 連結到這裡
                                         className="hidden"
                                         accept="image/*"
+                                        onChange={handleFileChange}
                                     />
                                 </Button>
-                                <Button className="bg-gray-600">
+                                <Button className="bg-gray-600" onClick={handleSaveFile}>
                                     <div className="font-serif text-lg">
                                         SAVE
                                     </div>
