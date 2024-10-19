@@ -67,12 +67,12 @@ if (!self.define) {
     });
   };
 }
-define(['../../../../../../../Users/joan/Desktop/code/Meichu-Hackathon-12th/meichu-hackathon-12th/node_modules/workbox-routing/registerRoute.mjs', '../../../../../../../Users/joan/Desktop/code/Meichu-Hackathon-12th/meichu-hackathon-12th/node_modules/workbox-strategies/NetworkFirst.mjs', '../../../../../../../Users/joan/Desktop/code/Meichu-Hackathon-12th/meichu-hackathon-12th/node_modules/workbox-strategies/NetworkOnly.mjs', '../../../../../../../Users/joan/Desktop/code/Meichu-Hackathon-12th/meichu-hackathon-12th/node_modules/workbox-core/clientsClaim.mjs'], (function (registerRoute_mjs, NetworkFirst_mjs, NetworkOnly_mjs, clientsClaim_mjs) { 'use strict';
+define(['./workbox-e43f5367'], (function (workbox) { 'use strict';
 
   importScripts();
   self.skipWaiting();
-  clientsClaim_mjs.clientsClaim();
-  registerRoute_mjs.registerRoute("/", new NetworkFirst_mjs.NetworkFirst({
+  workbox.clientsClaim();
+  workbox.registerRoute("/", new workbox.NetworkFirst({
     "cacheName": "start-url",
     plugins: [{
       cacheWillUpdate: async ({
@@ -92,7 +92,7 @@ define(['../../../../../../../Users/joan/Desktop/code/Meichu-Hackathon-12th/meic
       }
     }]
   }), 'GET');
-  registerRoute_mjs.registerRoute(/.*/i, new NetworkOnly_mjs.NetworkOnly({
+  workbox.registerRoute(/.*/i, new workbox.NetworkOnly({
     "cacheName": "dev",
     plugins: []
   }), 'GET');
