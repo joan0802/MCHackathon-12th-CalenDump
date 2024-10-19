@@ -68,18 +68,20 @@ export default function DateHeader() {
                                             setSelectedDate(newDate);
                                         }}
                                     >
+                                        <div className="p-0">
                                         {year}
+                                        </div>
                                     </Button>
                                 ))}
                             </div>
                         </DialogContent>
                     </Dialog>
-                    <span className="text-lg font-medium">{currentMonth.en}</span>
-                    <span className="text-lg font-medium">{currentMonth.zh}</span>
+                    <div className="text-lg font-medium items-center">{currentMonth.en}</div>
+                    <div className="text-lg font-medium items-center">{currentMonth.zh}</div>
                 </div>
             </div>
 
-            <div className="flex justify-center mt-10 mb-10">
+            <div className="flex justify-center items-center p-10 mb-5">
                 <Dialog>
                     <DialogTrigger asChild>
                         <Button
