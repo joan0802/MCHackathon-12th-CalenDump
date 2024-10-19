@@ -46,19 +46,36 @@ export default function DateHeader() {
     );
 
     // Function to handle month change confirmation
-    const handleChangeMonth = () => {
+    // Function to fetch page data and navigate
+    const fetchPageDataAndNavigate = async (formattedDate) => {
+        try {
+            const response = await fetch(`/api/event/date=${formattedDate}`);
+            const pageData = await response.json();
+            // Handle the pageData as needed (e.g., update state)
+            router.push(`/page/${formattedDate}`);
+        } catch (error) {
+            console.error('Error fetching page data:', error);
+            // Handle error (e.g., show error message to user)
+        }
+    };
+
+    const handleChangeMonth = async () => {
         const newDate = new Date(selectedDate);
         newDate.setMonth(selectedMonth);
         setSelectedDate(newDate);
         setIsDialogOpen(false); // Close the month dialog
+        const formattedDate = newDate.toISOString().split('T')[0];
+        await fetchPageDataAndNavigate(formattedDate);
     };
 
     // Function to handle year change confirmation
-    const handleChangeYear = () => {
+    const handleChangeYear = async () => {
         const newDate = new Date(selectedDate);
         newDate.setFullYear(selectedYear);
         setSelectedDate(newDate);
         setIsYearDialogOpen(false); // Close the year dialog
+        const formattedDate = newDate.toISOString().split('T')[0];
+        await fetchPageDataAndNavigate(formattedDate);
     };
 
     return (
