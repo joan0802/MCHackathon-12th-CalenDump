@@ -8,6 +8,16 @@ module.exports = {
     ],
     theme: {
         extend: {
+            textStrokeWidth: {
+                '1': '1px',
+                '2': '2px',
+                '3': '3px',
+            },
+            textStrokeColor: {
+                'black': '#000',
+                'white': '#fff',
+                'red': '#f00',
+            },
             colors: {
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
@@ -56,9 +66,33 @@ module.exports = {
                 sm: 'calc(var(--radius) - 4px)'
             },
             fontFamily: {
-                serif: ['"Noto Serif"', 'serif'], // Add Noto Serif to the serif font family
+                serif: ['"Noto Serif"', 'serif'],
+                sans: ['"Noto Sans TC"', 'sans-serif']
             },
         }
     },
-    plugins: [require("tailwindcss-animate")],
+    plugins: [require("tailwindcss-animate"),
+    function ({ addUtilities }) {
+        addUtilities({
+            '.text-stroke-1': {
+                '-webkit-text-stroke-width': '1px',
+            },
+            '.text-stroke-2': {
+                '-webkit-text-stroke-width': '2px',
+            },
+            '.text-stroke-5': {
+                '-webkit-text-stroke-width': '5px',
+            },
+            '.text-stroke-10': {
+                '-webkit-text-stroke-width': '10px',
+            },
+            '.text-stroke-green': {
+                '-webkit-text-stroke-color': '#13492f',
+            },
+            '.text-stroke-white': {
+                '-webkit-text-stroke-color': '#fff',
+            },
+        });
+    },
+    ],
 };
