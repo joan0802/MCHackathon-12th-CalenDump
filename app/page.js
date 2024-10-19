@@ -28,7 +28,7 @@ export default function Home() {
 
 
     return (
-        <div className="h-screen bg-black p-4">
+        <div className="h-screen bg-black">
             <Card className="max-w-md mx-auto h-full bg-white relative rounded-2xl">
                 <CardContent className="p-0 h-full rounded-2xl">
                     <DateHeader/>
