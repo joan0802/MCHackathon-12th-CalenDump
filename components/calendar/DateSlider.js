@@ -1,4 +1,3 @@
-import { useSwipeable } from 'react-swipeable';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -22,19 +21,13 @@ function DateSlider({ selectedDate, setSelectedDate }) {
             // router.push(`/page/${newDate.toISOString().split('T')[0]}`);
         }
     };
-
-    const swipeHandlers = useSwipeable({
-        onSwipedLeft: () => handleSwipe(1),
-        onSwipedRight: () => handleSwipe(-1),
-    });
-
     // Prevent rendering until the component is mounted on the client
     if (!isClient) {
         return null;
     }
 
     return (
-        <div {...swipeHandlers} className="flex justify-center items-center p-10 mb-8">
+        <div className="flex justify-center items-center p-10 mb-8">
             <Dialog>
                 <DialogTrigger asChild>
                     <Button
@@ -57,8 +50,9 @@ function DateSlider({ selectedDate, setSelectedDate }) {
                                 variant="outline"
                                 className="w-10 h-10"
                                 onClick={() => {
-                                    const newDate = new Date(selectedDate || new Date());
+                                    const newDate = new Date(selectedDate);
                                     newDate.setDate(day);
+                                    console.log("newDate=====>", newDate);
                                     setSelectedDate(newDate);
                                 }}
                             >

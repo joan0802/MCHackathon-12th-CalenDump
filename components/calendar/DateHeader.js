@@ -5,21 +5,21 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from '@/components/ui/button';
 import DateSlider from '@/components/calendar/DateSlider';
 
-export default function DateHeader() {
-    const [selectedDate, setSelectedDate] = useState(new Date());
+export default function DateHeader({selectedDate, setSelectedDate}) {
+    // const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedYear, setSelectedYear] = useState(selectedDate.getFullYear());
     const [selectedMonth, setSelectedMonth] = useState(selectedDate.getMonth());
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [isYearDialogOpen, setIsYearDialogOpen] = useState(false);
 
     // Update date every minute to ensure it stays current
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setSelectedDate(new Date());
-        }, 60000);
+    // useEffect(() => {
+    //     const timer = setInterval(() => {
+    //         setSelectedDate(new Date());
+    //     }, 60000);
 
-        return () => clearInterval(timer);
-    }, []);
+    //     return () => clearInterval(timer);
+    // }, []);
 
     // Get current month in English and Chinese
     const months = {
