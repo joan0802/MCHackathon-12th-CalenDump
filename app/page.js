@@ -50,12 +50,15 @@ export default function Home() {
     }, [searchParams, router]);
 
 
-    const test = () => {
-        window.location.href = "https://ef91-140-113-136-220.ngrok-free.app/login";
-    }
+    useEffect(() => {
+        // 檢查是否在客戶端執行
+        if (typeof window !== 'undefined') {
+            window.location.href = "https://ef91-140-113-136-220.ngrok-free.app/login";
+        }
+    }, []);
 
     const handleShowDump = () => {
-        
+
     }
 
 
@@ -67,7 +70,7 @@ export default function Home() {
                         {/* <Button onClick={test}>
                             hiiiiii
                         </Button> */}
-                        <DateHeader selectedDate={selectedDate} setSelectedDate={setSelectedDate}/>
+                        <DateHeader selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
                         <div className="w-full bg-[#13492f] h-[0.7rem] mb-2">
                         </div>
                         <div className="border border-[0.75rem] border-[#13492f] h-[32rem]">
@@ -84,7 +87,7 @@ export default function Home() {
                                 <DialogContent className="sm:max-w-[425px]">
                                     <DialogHeader>
                                         <DialogTitle className="font-serif">2024.10.14-2024.10.20 Weekly Dump</DialogTitle>
-                                        
+
                                     </DialogHeader>
                                     {/* Add your weekly dump content here */}
                                 </DialogContent>
