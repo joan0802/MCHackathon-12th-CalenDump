@@ -5,14 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from "@/contexts/AuthContext";
 // import { CameraIcon } from '@/camera.png'
 
-export default function TimeSlots(dateString) {
-    const [currentDate, setCurrentDate] = useState(() => {
-      if (dateString === "") {
-        const today = new Date();
-        return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-      }
-      return dateString;
-    });
+export default function TimeSlots({dateString}) {    
     
     const fileInputRef = useRef(null);
     const [uploadedImage, setUploadedImage] = useState(null);
@@ -25,7 +18,8 @@ export default function TimeSlots(dateString) {
       async function fetchData(token) {
         try {
             console.log("calling api");
-          const data = await fetchEvent(currentDate, token);
+          const data = await fetchEvent(dateString, token);
+          console.log("data=====>", data);
           setTimeSlots((prevTimeSlots) => {
             // Only update state if data has changed
             if (JSON.stringify(prevTimeSlots) !== JSON.stringify(data)) {
@@ -47,7 +41,7 @@ export default function TimeSlots(dateString) {
       alert('請先登入');
       window.location.href = '/login';
     }
-  }, []);
+  }, [dateString]);
     // const timeSlots = [
     //     { time: "10:00-12:00", title: "微積分期中考" },
     //     { time: "13:00-15:00", title: "演算法上課" },
@@ -161,7 +155,8 @@ export default function TimeSlots(dateString) {
 let eventNote = new Map();
 let eventImg = new Map();
 async function fetchEvent(dateString, token) {
-  const responsePromise = await fetch(process.env.NEXT_PUBLIC_BACKEND + '/api/event/' + '2024-10-13', {
+  console.log("dateString=====> ", dateString.toISOString().split('T')[0]);
+  const responsePromise = await fetch(process.env.NEXT_PUBLIC_BACKEND + '/api/event/' + dateString.toISOString().split('T')[0], {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${token}`,

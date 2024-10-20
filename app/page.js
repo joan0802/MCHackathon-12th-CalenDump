@@ -10,11 +10,15 @@ import { Button } from "@/components/ui/button";
 // import GoogleCalendarButton from '@/components/calendar/GoogleCalendarButton';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+
 
 export default function Home() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [token, setToken] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
 
     useEffect(() => {
         if ('serviceWorker' in navigator) {
@@ -41,13 +45,17 @@ export default function Home() {
                 alert('登入以使用所有功能！');
                 window.location.href = '/login';
             }
-            
+
         }
-    }, [searchParams, router]);  
-    
-    
+    }, [searchParams, router]);
+
+
     const test = () => {
         window.location.href = "https://ef91-140-113-136-220.ngrok-free.app/login";
+    }
+
+    const handleShowDump = () => {
+        
     }
 
 
@@ -56,17 +64,31 @@ export default function Home() {
             <div className="h-screen">
                 <Card className="max-w-md mx-auto h-full bg-white relative rounded-2xl">
                     <CardContent className="p-0 h-full rounded-2xl">
-                        <Button onClick={test}>
+                        {/* <Button onClick={test}>
                             hiiiiii
-                        </Button>
-                        <DateHeader />
+                        </Button> */}
+                        <DateHeader selectedDate={selectedDate} setSelectedDate={setSelectedDate}/>
                         <div className="w-full bg-[#13492f] h-[0.7rem] mb-2">
                         </div>
-                        <div className="border border-[0.75rem] border-[#13492f] h-[35rem]">
+                        <div className="border border-[0.75rem] border-[#13492f] h-[32rem]">
                             <LunarInfo />
-                            <TimeSlots dateString="2024-10-19" />
+                            <TimeSlots dateString={selectedDate} />
                         </div>
-                        <div className="w-full bg-[#13492f] h-[0.7rem] mt-2">
+                        <div className="bg-[#13492f] flex justify-end px-4">
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <Button className="bg-white bg-opacity-20 flex justify-end rounded-2xl mb-4 font-serif">
+                                        Your Weekly Dump
+                                    </Button>
+                                </DialogTrigger>
+                                <DialogContent className="sm:max-w-[425px]">
+                                    <DialogHeader>
+                                        <DialogTitle className="font-serif">2024.10.14-2024.10.20 Weekly Dump</DialogTitle>
+                                        
+                                    </DialogHeader>
+                                    {/* Add your weekly dump content here */}
+                                </DialogContent>
+                            </Dialog>
                         </div>
                         {/* <GoogleCalendarButton /> */}
                     </CardContent>

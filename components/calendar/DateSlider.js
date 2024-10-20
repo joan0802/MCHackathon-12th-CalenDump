@@ -50,8 +50,9 @@ function DateSlider({ selectedDate, setSelectedDate }) {
                                 variant="outline"
                                 className="w-10 h-10"
                                 onClick={() => {
-                                    const newDate = new Date(selectedDate || new Date());
+                                    const newDate = new Date(selectedDate);
                                     newDate.setDate(day);
+                                    console.log("newDate=====>", newDate);
                                     setSelectedDate(newDate);
                                 }}
                             >
