@@ -55,7 +55,7 @@ export default function Home() {
     }
 
     const handleShowDump = () => {
-        
+
     }
 
 
@@ -67,7 +67,7 @@ export default function Home() {
                         {/* <Button onClick={test}>
                             hiiiiii
                         </Button> */}
-                        <DateHeader selectedDate={selectedDate} setSelectedDate={setSelectedDate}/>
+                        <DateHeader selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
                         <div className="w-full bg-[#13492f] h-[0.7rem] mb-2">
                         </div>
                         <div className="border border-[0.75rem] border-[#13492f] h-[32rem]">
@@ -81,10 +81,21 @@ export default function Home() {
                                         Your Weekly Dump
                                     </Button>
                                 </DialogTrigger>
-                                <DialogContent className="sm:max-w-[425px]">
+                                <DialogContent className="sm:max-w-[425px] bg-gray-50">
                                     <DialogHeader>
-                                        <DialogTitle className="font-serif">2024.10.14-2024.10.20 Weekly Dump</DialogTitle>
-                                        
+                                        <DialogTitle className="font-serif text-[#13492f]">Your Weekly Dump</DialogTitle>
+                                        <div className="font-serif">2024.10.14 - 2024.10.20</div>
+                                        <img
+                                            src="/dump_image.jpg"
+                                            alt="Weekly Dump Image"
+                                            width={400}
+                                            height={300}
+                                        />
+                                        <div className="font-bold font-serif text-[#13492f]">Summary</div>
+                                        <div><span className="font-bold text-[#13492f]">總結：</span>這週充滿了難忘的回憶，從密室逃脫的刺激到與朋友玩桌遊的歡樂，還有實習的尾聲，以及與家人的溫馨時光。當然，也有一些壓力和煩惱，但你依然能夠從生活中找到慰藉，像是可愛的貓咪和美麗的夜景🌃。</div>
+                                        <div>
+                                            <span className="font-bold text-[#13492f]">建議：</span>生活就像摩天輪，有高有低，重要的是享受每個當下🎡。面對挑戰時，請記得你內心的堅強和身邊的支持💪。繼續保持積極的心態，迎接新的挑戰和機遇！✨
+                                        </div>
                                     </DialogHeader>
                                     {/* Add your weekly dump content here */}
                                 </DialogContent>
